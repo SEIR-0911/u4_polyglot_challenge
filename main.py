@@ -104,7 +104,12 @@ else:
 #-----------------------------------------------
 # Solution goes here ->
 
-
+num = 3
+remainder = any(num % i  == 0 for i in range(2, num))
+if remainder:
+    print(False)
+else:
+    print(True)
 
 
 
@@ -131,6 +136,11 @@ else:
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+
+
+
+
 #-----------------------------------------------
 
 
