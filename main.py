@@ -14,6 +14,23 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def add_list(*nums):
+    sum_nums = 0
+    
+    for num in nums:
+        if not isinstance(num, (int, float)):
+            return float('nan')
+        else:
+            sum_nums += num
+    
+    return sum_nums
+
+
+result = add_list("marshmellow_fluff")
+print(result)
+    
+
 #-----------------------------------------------
 
 
@@ -31,6 +48,13 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+my_str = 'Led Zeppelin Rules'
+
+result = my_str[1:-1]
+print(result)
+
+
 #-----------------------------------------------
 
 
@@ -50,6 +74,17 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+test_str = "a nut for a jar of tuna"
+joined_str = ''.join(test_str.lower().split())
+if joined_str == joined_str[::-1]:
+    print(True)
+else:
+    print(False)
+
+
+
+
 #-----------------------------------------------
 
 
