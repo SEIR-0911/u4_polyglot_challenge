@@ -14,10 +14,27 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def add_list(*integers):
+    total = 0
+    
+    for num in integers:
+        # Check if the argument is a number
+        if not isinstance(num, (int, float)):
+            return "NaN"
+        
+        total += num
+    
+    return total
+
+print("Prompt 1")
+print(add_list(1))
+print(add_list(100, 50))
+print(add_list("peanutbutterjellytime"))
+
+# notes: https://realpython.com/python-kwargs-and-args/
+
 #-----------------------------------------------
-
-
-
 
 # Challenge 2: remove_ends
 
@@ -31,9 +48,20 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def remove_ends(input_str):
+    if len(input_str) < 3:
+        return ""
+    else: 
+        return input_str[1:-1]
+
+print("Prompt 2")
+print(remove_ends('Led Zeppelin Rules'))
+print(remove_ends('a'))
+
+# notes: (string slice) https://www.w3schools.com/python/gloss_python_string_slice.asp
+
 #-----------------------------------------------
-
-
 
 # Challenge 3: is_palindrome
 
@@ -50,6 +78,19 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def is_palindrome(s):
+    if len(s) <= 1:
+        return True
+    
+    return s== s[::-1]
+
+print("Prompt 3")
+print(is_palindrome('rotor')) # true
+print(is_palindrome('SEI Rocks')) #false
+print(is_palindrome('A nut for a jar of tuna')) # true
+print(is_palindrome('')) #  true
+
 #-----------------------------------------------
 
 
@@ -68,6 +109,22 @@
 
 #-----------------------------------------------
 # Solution goes here ->
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+                   if num % i == 0:
+                    return False
+    return True
+
+print("Prompt 4")
+print(is_prime(2)) # //=> true
+print(is_prime(3)) # //=> true 
+print(is_prime(4)) # //=> false
+print(is_prime(29)) # //=> true
+print(is_prime(200)) # //=> false
+
 #-----------------------------------------------
 
 
@@ -90,6 +147,29 @@
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+def total_checkout_cost(shopping_cart, homestate):
+    sales_tax_rate = 0.085
+    total_cost = sum(item["price"] for item in shopping_cart)
+    total_cost_with_tax = total_cost * (1 + sales_tax_rate)
+    if homestate in ["HI", "AK", "TX", "FL"]:
+        total_cost_with_tax += 10
+    elif homestate in ["AL", "MS", "NV", "IL"]:
+        total_cost_with_tax += 5
+    return total_cost_with_tax
+
+shopping_cart = [ 
+  {"item": "headphones", "price": 25},
+  {"item": "speakers", "price": 40 },
+  {"item": "microphone", "price": 70},
+  {"item": "lamp", "price": 15 },
+  {"item": "tower fan", "price": 35 },
+]
+
+homestate = "TX"
+total_cost = total_checkout_cost(shopping_cart, homestate)
+print(f"Total Cost for everything in {homestate}: ${total_cost:.2f}")
+
 #-----------------------------------------------
 
 
@@ -107,10 +187,29 @@
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+def fizz_buzz(num):
+    if not isinstance(num, int):
+        return f'{num} is not a number'
+    
+    result = ""
+    if num % 3 == 0:
+        result += "Fizz"
+    if num % 5 == 0:
+        result += "Buzz"
+    
+    if result:
+        return f"{num} {result}"
+    else:
+        return str(num)
+
+print(fizz_buzz(10))
+print(fizz_buzz(30))
+print(fizz_buzz(18))
+print(fizz_buzz(22))
+print(fizz_buzz("ham_sandwich"))  
+
 #-----------------------------------------------
-
-
-
 
 # Challenge 7 - Chessboard Creator
 
@@ -146,4 +245,23 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def chess_board(rows, columns):
+    board = []
+    for i in range(rows):
+        row = ['O' if (i + j) % 2 == 0 else 'X' for j in range(columns)]
+        board.append(row)
+
+    return board
+
+chessboard_1 = chess_board(6, 4)
+for row in chessboard_1:
+    print(row)
+
+print("\n")
+
+chessboard_2 = chess_board(3, 7)
+for row in chessboard_2:
+    print(row)
+
 #-----------------------------------------------
