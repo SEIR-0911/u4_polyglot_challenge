@@ -137,7 +137,24 @@ else:
 #-----------------------------------------------
 # Solution Goes Here ->
 
+price = 35
+user_homestate = "HI" 
 
+def total_cost(price, user_homestate):
+    tax_rate = 1.085
+    shipping_fee = 0
+
+    if user_homestate in ('HI', 'AK', 'TX', 'FL'):
+        shipping_fee = 10
+    elif user_homestate in ('AL', 'MS', 'NV', 'IL'):
+        shipping_fee = 5
+
+    total = price * tax_rate + shipping_fee
+    return total
+
+
+final_cost = total_cost(price, user_homestate)
+print("Total cost with tax and shipping: $", final_cost)
 
 
 
@@ -158,6 +175,26 @@ else:
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+def fizz_buzz(value):
+    if not isinstance(value, int):
+        return f"{value} is not a number"
+
+    result = ""
+    if value % 3 == 0:
+        result += "Fizz"
+    if value % 5 == 0:
+        result += "Buzz"
+
+    if not result:
+        result = str(value)
+
+    return result
+
+for num in range(1, 51):
+    print(fizz_buzz(num))
+
+
 #-----------------------------------------------
 
 
