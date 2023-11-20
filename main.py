@@ -234,4 +234,28 @@ for num in range(1, 51):
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+
+def checkerboard(X, Y):
+    board = [ ]
+
+    for row in range(X):
+        value_of_row = ['X' if (row + col) % 2 == 0 else '0' for col in range(Y)]
+        board.append(value_of_row)
+    return board
+
+
+
+
+X = 5
+Y = 3
+result = checkerboard(X, Y)
+
+
+for row in result:
+    print(row)
+
+
+
+
 #-----------------------------------------------
