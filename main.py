@@ -13,11 +13,34 @@
 # add("peanut_butter", "marshmellow_fluff") //=> NaN
 
 #-----------------------------------------------
-# Solution Goes Here - >
+print("======== Challenge 1: add_List ===========")
+
+def add_list(*listNum):
+    if not listNum:
+        print('No number to add')
+        return 0
+
+    result_sum = 0
+    
+    for num in listNum:
+
+            if not isinstance(num, (int, float)):
+                return "NaN"
+            result_sum += num
+    return result_sum
+result0 = add_list()
+result1 = add_list(1)
+result2 = add_list( 1,50,1.23)
+result3 = add_list( 7,-12)
+result4 = add_list( "peanut_butter", "marshmellow_fluff")
+
+print(result0)
+print(result1)
+print(result2)
+print(result3)
+print(result4)
+
 #-----------------------------------------------
-
-
-
 
 # Challenge 2: remove_ends
 
@@ -30,10 +53,22 @@
 # remove_ends('a'); //=> "" (empty string)
 
 #-----------------------------------------------
-# Solution Goes Here - >
+print("======== Challenge 2: remove_ends ===========")
+
+def remove_ends(str):
+    result = ""
+    if len(str) < 3 : return ""
+     #Start from 1 cut 0 out until -1
+    result = (str[1:-1])
+    return result
+
+strResult0 =  remove_ends('')
+strResult1 =  remove_ends('Hello World')  
+
+print(strResult0)
+print(strResult1)
+
 #-----------------------------------------------
-
-
 
 # Challenge 3: is_palindrome
 
@@ -49,10 +84,24 @@
 # is_palindrome(''); //=> true
 
 #-----------------------------------------------
-# Solution Goes Here - >
+print("======== Challenge 3: is_palindrome ===========")
+
+def is_palindrome(str):
+    if(len(str)<=1): True
+    str= str.lower().replace(" ", "")
+    reverse_str_lower_no_space = str[::-1]
+    return  reverse_str_lower_no_space == str
+     
+test_str0 = is_palindrome('')
+test_str1 = is_palindrome('b')
+test_str2 = is_palindrome('book')
+test_str3 = is_palindrome('W ow')
+
+print(test_str0)
+print(test_str1)
+print(test_str2)
+print(test_str3)
 #-----------------------------------------------
-
-
 
 # Challenge 4: is_prime
 
@@ -67,11 +116,25 @@
 # is_prime(200) //=> false
 
 #-----------------------------------------------
-# Solution goes here ->
+print("======== Challenge 4: is_prime ========")
+
+def is_prime(num):
+    if(num<2): return False
+    for i in range(2,num):
+        if(num%i==0 ):
+            return False
+    return True
+
+my_num0 = is_prime(0) 
+my_num00 = is_prime(2) 
+my_num1 = is_prime(211) 
+my_num2 = is_prime(212) 
+
+print("is prime?",my_num0)
+print("is prime?",my_num00)
+print("is prime?",my_num1)
+print("is prime?",my_num2)
 #-----------------------------------------------
-
-
-
 
 # Challenge 5: total_checkout_cost
 
@@ -87,11 +150,38 @@
 #   {"item": "tower fan", "price": 35 },
 # ]
 
-
 #-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+print("======== Challenge 5: total_checkout_cost ========")
 
+shopping_cart = [ 
+  {"item": "headphones", "price": 25},
+  {"item": "speakers", "price": 40 },
+  {"item": "microphone", "price": 70},
+  {"item": "lamp", "price": 15 },
+  {"item": "tower fan", "price": 35 },
+]
+def total_cost(cart,homestate):
+    shipping_10 = ['HI', 'AK', 'TX', 'FL']
+    shipping_5 = ['AL', 'MS', 'NV', 'IL']
+    total=0
+    for item in cart:
+        total += item["price"]
+        total += total*0.085 #add Tax
+    #Add Shipping
+    if homestate in shipping_10:
+        print('$10 Shipping')
+        total +=10
+    elif homestate in shipping_5:
+        print('$5 Shipping')
+        total +=5
+    else:
+        print('Shipping is free!')
+    return total
+
+total_price = total_cost(shopping_cart,'TX')
+
+print(total_price)
+#-----------------------------------------------
 
 # Challenge 6: fizz_buzz
 
@@ -106,11 +196,27 @@
 # fizz_buzz(ham_sandwich) //=> "ham_sandwich is not a Number"
 
 #-----------------------------------------------
-# Solution Goes Here ->
+print("======== Challenge 6: fizz_buzz ========")
+
+def fizz_buzz(number):
+    if not isinstance(number, int):
+        return f"{number} is not a number"
+    array_num = []
+    for i in range(1, number+1):
+        if(i%15==0):
+             array_num.append('FizzBuzz')
+        elif(i%3==0):
+             array_num.append('Fizz')
+        elif(i%5==0):
+            array_num.append('Buzz')
+        else:
+             array_num.append(i)
+    return array_num
+
+fizz_buzz_print = fizz_buzz(50)
+print(fizz_buzz_print)
+
 #-----------------------------------------------
-
-
-
 
 # Challenge 7 - Chessboard Creator
 
@@ -145,5 +251,25 @@
 
 
 #-----------------------------------------------
-# Solution Goes Here - >
+print("======== Challenge 7: Chessboard Creator ========")
+
+def chess_board(rows, columns):
+    board = []
+
+    for i in range(rows):
+        row = []
+        for j in range(columns):
+            if (i + j) % 2 == 0:
+                row.append("O")
+            else:
+                row.append("X")
+        board.append(row)
+
+    return board
+   
+my_board = chess_board(6,4)
+my_board2 = chess_board(3,7)
+print(my_board)
+print(my_board2)
+
 #-----------------------------------------------
