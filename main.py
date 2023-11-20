@@ -12,12 +12,18 @@
 # add(7,-12) //=> -5
 # add("peanut_butter", "marshmellow_fluff") //=> NaN
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+import math
 
+def add_list(*args):
+    nums = []
+    nums.extend([*args])
+    try:
+        return math.fsum(nums)
+    except:
+        return('NaN')
 
-
+# print(add_list(4, 12, 4.9))
+# print(add_list('cat'))
 
 # Challenge 2: remove_ends
 
@@ -29,10 +35,12 @@
 # remove_ends('Led Zeppelin Rules'); //=> "ed Zeppelin Rule"
 # remove_ends('a'); //=> "" (empty string)
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def remove_ends():
+    string = 'mouse'
+    end = (len(string)-1)
+    return(string[1:end])
 
+# print(remove_ends())
 
 
 # Challenge 3: is_palindrome
@@ -48,10 +56,25 @@
 # is_palindrome('A nut for a jar of tuna'); //=> true
 # is_palindrome(''); //=> true
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
 
+def is_palindrome(string):
+    length = (len(string))
+    lower_string = string.lower()
+    string_no_space = lower_string.replace(' ', '')
+    string_list = list(string_no_space)
+    string_list.reverse()
+    reverse_string = ''.join(string_list)
+    if (length) == 1:
+        return True
+    elif length == 0:
+        return True
+    elif string_no_space == reverse_string:
+        return True
+    else:
+        return False
+
+# print(is_palindrome('A nut for a jar of tuna'))
+# print(is_palindrome('cat'))
 
 
 # Challenge 4: is_prime
@@ -66,10 +89,20 @@
 # is_prime(29) //=> true
 # is_prime(200) //=> false
 
-#-----------------------------------------------
-# Solution goes here ->
-#-----------------------------------------------
 
+def is_prime(number):
+    if number == 1:
+        return False
+    elif number == 2:
+        return True
+    else:
+        for i in range(2, number):
+            if(number % i==0):
+                return False
+        return True
+
+
+# print(is_prime(4))
 
 
 
@@ -79,18 +112,28 @@
 
 # Your function should take the list and the user's homestate as arguments
 
-# shopping_cart = [ 
-#   {"item": "headphones", "price": 25},
-#   {"item": "speakers", "price": 40 },
-#   {"item": "microphone", "price": 70},
-#   {"item": "lamp", "price": 15 },
-#   {"item": "tower fan", "price": 35 },
-# ]
+shopping_cart = [ 
+  {"item": "headphones", "price": 25},
+  {"item": "speakers", "price": 40 },
+  {"item": "microphone", "price": 70},
+  {"item": "lamp", "price": 15 },
+  {"item": "tower fan", "price": 35 },
+]
 
+def total_checkout_cost(shopping_cart, state):
+    total_cost = 0
+    for item in shopping_cart:
+        total_cost += round(item['price'] * 1.085, 2)
+        # print(total_cost)
+    if state == 'HI' or state == 'AK' or state == 'TX' or state == 'FL':
+        total_cost += 10
+    if state == 'AL' or state == 'MS' or state == 'NV' or state == 'IL':
+        total_cost += 5
+    else:
+        total_cost += 0
+    return total_cost
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+# print(total_checkout_cost(shopping_cart, 'HI'))
 
 
 # Challenge 6: fizz_buzz
@@ -105,21 +148,22 @@
 # fizz_buzz(22) //=> 22 ""
 # fizz_buzz(ham_sandwich) //=> "ham_sandwich is not a Number"
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+def fizz_buzz(i):
+        if (i%3 == 0 and i%5 == 0): print('fizzbuzz')
+        elif (i%3 == 0): print('fizz')
+        elif (i%5 == 0): print('buzz')
+        else: print(i)
 
+
+print(fizz_buzz(30))
 
 
 
 # Challenge 7 - Chessboard Creator
 
 # A grid is a perfect starting point for many games (Chess, battleships, Candy Crush!).
-
 # Making a digital chessboard is an interesting way of visualising how loops can work together.
-
 # Your task is to write a function that takes two integers rows and columns and returns a chessboard pattern as a two dimensional array.
-
 # So chess_board(6,4) should return an array like this:
 
 [
@@ -140,10 +184,25 @@
 ]
 
 #The white spaces should be represented by an: 'O' and the black an: 'X'
-
 # The first row should always start with a white space 'O'
 
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def chess_board(rows, columns):
+    board = []
+    for row in range (rows):
+        board.append([])
+        for column in range (columns):
+            if row%2 == 0 and column%2 == 0:
+                board[row].insert((column), 'O')
+            elif row%2 == 0 and column%2 != 0:
+                board[row].insert((column), 'X')
+            elif row%2 != 0 and column%2 != 0:
+                board[row].insert((column), 'O')
+            else:
+                board[row].insert((column), 'X')
+    return(board)
+
+
+
+
+print(chess_board(3, 7))
