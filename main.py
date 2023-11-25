@@ -12,12 +12,20 @@
 # add(7,-12) //=> -5
 # add("peanut_butter", "marshmellow_fluff") //=> NaN
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def add_list(*nums):
 
+    if not nums:
+        return 0
 
+    for num in nums:
+        if not isinstance(num, (int, float)):
+            return "NaN"
 
+    return sum(nums)
+
+print(add_list(1,2,3,4,5,6,7,'i'))
+print(add_list())
+print(add_list(1,2,3,4,5,6,7))
 
 # Challenge 2: remove_ends
 
@@ -29,9 +37,13 @@
 # remove_ends('Led Zeppelin Rules'); //=> "ed Zeppelin Rule"
 # remove_ends('a'); //=> "" (empty string)
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def remove_ends(str):
+    if len(str) < 3:
+        return ''
+    return str[1:-1]
+
+print(remove_ends('I already know python'))
+print(remove_ends('at'))
 
 
 
@@ -48,10 +60,17 @@
 # is_palindrome('A nut for a jar of tuna'); //=> true
 # is_palindrome(''); //=> true
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def is_palindrome(s):
+    if len(s) <= 1:
+        return True
 
+    return s== s[::-1]
+
+print("Prompt 3")
+print(is_palindrome('rotor')) # true
+print(is_palindrome('SEI Rocks')) #false
+print(is_palindrome('A nut for a jar of tuna')) # true
+print(is_palindrome('')) #  true
 
 
 # Challenge 4: is_prime
@@ -66,11 +85,20 @@
 # is_prime(29) //=> true
 # is_prime(200) //=> false
 
-#-----------------------------------------------
-# Solution goes here ->
-#-----------------------------------------------
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+                   if num % i == 0:
+                    return False
+    return True
 
-
+print("Prompt 4")
+print(is_prime(2)) # //=> true
+print(is_prime(3)) # //=> true 
+print(is_prime(4)) # //=> false
+print(is_prime(29)) # //=> true
+print(is_prime(200)) # //=> false
 
 
 # Challenge 5: total_checkout_cost
@@ -88,10 +116,34 @@
 # ]
 
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+shopping_cart = [ 
+  {"item": "headphones", "price": 25},
+  {"item": "speakers", "price": 40 },
+  {"item": "microphone", "price": 70},
+  {"item": "lamp", "price": 15 },
+  {"item": "tower fan", "price": 35 },
+]
+def total_cost(cart,homestate):
+    shipping_10 = ['HI', 'AK', 'TX', 'FL']
+    shipping_5 = ['AL', 'MS', 'NV', 'IL']
+    total=0
+    for item in cart:
+        total += item["price"]
+        total += total*0.085 #add Tax
+    #Add Shipping
+    if homestate in shipping_10:
+        print('$10 Shipping')
+        total +=10
+    elif homestate in shipping_5:
+        print('$5 Shipping')
+        total +=5
+    else:
+        print('Shipping is free!')
+    return total
 
+total_price = total_cost(shopping_cart,'TX')
+
+print(total_price)
 
 # Challenge 6: fizz_buzz
 
@@ -105,12 +157,15 @@
 # fizz_buzz(22) //=> 22 ""
 # fizz_buzz(ham_sandwich) //=> "ham_sandwich is not a Number"
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
-
-
-
+def fizz_buzz(num):
+    if num % 3 == 0:
+        return "Fizz"
+    elif num % 5 == 0:
+        return "Buzz"
+    elif num % 3 == 0 and num % 5 == 0:
+        return "FizzBuzz"
+    elif not isinstance(num, int):
+        return f"${num} is not a number" 
 
 # Challenge 7 - Chessboard Creator
 
@@ -144,6 +199,22 @@
 # The first row should always start with a white space 'O'
 
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def chess_board(rows, columns):
+    board = []
+    for row in range (rows):
+        board.append([])
+        for column in range (columns):
+            if row%2 == 0 and column%2 == 0:
+                board[row].insert((column), 'O')
+            elif row%2 == 0 and column%2 != 0:
+                board[row].insert((column), 'X')
+            elif row%2 != 0 and column%2 != 0:
+                board[row].insert((column), 'O')
+            else:
+                board[row].insert((column), 'X')
+    return(board)
+
+
+
+
+print(chess_board(3, 7))
