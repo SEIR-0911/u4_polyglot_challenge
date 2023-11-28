@@ -12,11 +12,11 @@
 # add(7,-12) //=> -5
 # add("peanut_butter", "marshmellow_fluff") //=> NaN
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
-
-
+ def add_list(*args):
+    try:
+        return sum(map(float, args))
+    except ValueError:
+        return "NaN"
 
 
 # Challenge 2: remove_ends
@@ -29,9 +29,10 @@
 # remove_ends('Led Zeppelin Rules'); //=> "ed Zeppelin Rule"
 # remove_ends('a'); //=> "" (empty string)
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def remove_ends(s):
+    if len(s) < 3:
+        return ""
+    return s[1:-1]
 
 
 
@@ -48,10 +49,10 @@
 # is_palindrome('A nut for a jar of tuna'); //=> true
 # is_palindrome(''); //=> true
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
 
+def is_palindrome(s):
+    s = ''.join(s.lower().split())
+    return s == s[::-1]
 
 
 # Challenge 4: is_prime
@@ -66,11 +67,13 @@
 # is_prime(29) //=> true
 # is_prime(200) //=> false
 
-#-----------------------------------------------
-# Solution goes here ->
-#-----------------------------------------------
-
-
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
 
 
 # Challenge 5: total_checkout_cost
@@ -88,10 +91,20 @@
 # ]
 
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
-
+def total_checkout_cost(cart, state):
+    tax_rate = 0.085
+    shipping_fee = 0
+    
+    if state in ['HI', 'AK', 'TX', 'FL']:
+        shipping_fee = 10
+    elif state in ['AL', 'MS', 'NV', 'IL']:
+        shipping_fee = 5
+    
+    total_cost = sum(item['price'] for item in cart)
+    total_cost += total_cost * tax_rate
+    total_cost += shipping_fee
+    
+    return total_cost
 
 # Challenge 6: fizz_buzz
 
@@ -105,11 +118,17 @@
 # fizz_buzz(22) //=> 22 ""
 # fizz_buzz(ham_sandwich) //=> "ham_sandwich is not a Number"
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+ef fizz_buzz(num):
+    if not isinstance(num, int):
+        return f"{num} is not a Number"
 
-
+    result = ''
+    if num % 3 == 0:
+        result += 'Fizz'
+    if num % 5 == 0:
+        result += 'Buzz'
+    
+    return result or num
 
 
 # Challenge 7 - Chessboard Creator
