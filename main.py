@@ -15,7 +15,18 @@
 #-----------------------------------------------
 # Solution Goes Here - >
 #-----------------------------------------------
-
+def add_list(list):
+    sum = 0
+    if len(list)== 0: 
+        return sum
+    else:
+        for element in list:
+            print(element)
+            if str(element).isdigit() == False:
+                return "NaN"
+            else:
+                sum += element
+    return sum
 
 
 
@@ -32,7 +43,10 @@
 #-----------------------------------------------
 # Solution Goes Here - >
 #-----------------------------------------------
-
+def remove_ends(string):
+    if len(string) < 3:
+        return ""
+    return string[1:-1] 
 
 
 # Challenge 3: is_palindrome
@@ -51,7 +65,11 @@
 #-----------------------------------------------
 # Solution Goes Here - >
 #-----------------------------------------------
-
+def is_palindrome(string):
+    formatted_string = string.lower().replace(" ", "")
+    if len(string) <= 1 or formatted_string == formatted_string[::-1]:
+        return True
+    return False
 
 
 # Challenge 4: is_prime
@@ -69,7 +87,18 @@
 #-----------------------------------------------
 # Solution goes here ->
 #-----------------------------------------------
-
+def is_prime(integer):
+    divisible = False
+    if integer <=1:
+        return False
+    for i in range(2, integer):
+        if integer % i == 0:
+            divisible = True
+            break
+    if divisible == True:
+        return False #Not prime
+    else: 
+        return True #Prime
 
 
 
@@ -79,20 +108,33 @@
 
 # Your function should take the list and the user's homestate as arguments
 
-# shopping_cart = [ 
-#   {"item": "headphones", "price": 25},
-#   {"item": "speakers", "price": 40 },
-#   {"item": "microphone", "price": 70},
-#   {"item": "lamp", "price": 15 },
-#   {"item": "tower fan", "price": 35 },
-# ]
-
+shopping_cart = [ 
+   {"item": "headphones", "price": 25},
+   {"item": "speakers", "price": 40 },
+   {"item": "microphone", "price": 70},
+   {"item": "lamp", "price": 15 },
+   {"item": "tower fan", "price": 35 },
+]
 
 #-----------------------------------------------
 # Solution Goes Here ->
 #-----------------------------------------------
+def calculate_cost(list, homestate):
+    cart_plus_tax = []
+    for item in list:
+        price_plus_tax = item["price"] * 1.085
+        cart_plus_tax.append(price_plus_tax)
+    cart_total = sum(cart_plus_tax)
+    if homestate == "HI" or homestate == "AK" or homestate == "TX" or homestate == "FL":
+        cart_total +=10
+        return cart_total
+    elif homestate == "AL" or homestate == "MS" or homestate == "NV" or homestate == "IL":
+        cart_total +=5
+        return cart_total
+    else:
+        return cart_total
 
-
+#print(calculate_cost(shopping_cart, "TX"))
 # Challenge 6: fizz_buzz
 
 # Prompt -> Write a program that prints the numbers from 1 to 50. But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”
@@ -108,6 +150,20 @@
 #-----------------------------------------------
 # Solution Goes Here ->
 #-----------------------------------------------
+def fizz_buzz(input):
+    if str(input).isdigit() == True:
+        if input % 3 == 0 and input % 5 == 0:
+            return "FizzBuzz"
+        elif input % 3 == 0:
+            return "Fizz"
+        elif input % 5 == 0:
+            return "Buzz"
+        else: 
+            return ""
+    else:
+        return "The input value is not a number."
+    
+#print(fizz_buzz("ham_sandwich"))
 
 
 
@@ -147,3 +203,19 @@
 #-----------------------------------------------
 # Solution Goes Here - >
 #-----------------------------------------------
+def make_chessboard(rows, columns):
+    chessboard = []
+    for row in range (rows):
+        chessboard.append([])
+        for column in range (columns):
+            if row%2 == 0 and column%2 == 0:  #even row, even column
+                chessboard[row].insert((column),"O")
+            elif row%2 == 0 and column%2 != 0: #even row, odd column
+                chessboard[row].insert((column), "X")
+            elif row%2 != 0 and column%2 != 0: #odd row, odd column
+                chessboard[row].insert((column), "O")
+            else:                               #odd row, even column
+                chessboard[row].insert((column), "X")
+    print(chessboard)
+
+#make_chessboard(3,7)
