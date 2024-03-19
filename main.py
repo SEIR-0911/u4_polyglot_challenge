@@ -14,6 +14,17 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def add_list(*args):
+    if not args:
+        return 0 
+    total=0
+    for arg in args:
+        if not isinstance(arg, (int, float)):
+            return "NaN"
+        total += arg
+    return total
+        
 #-----------------------------------------------
 
 
@@ -31,6 +42,12 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+
+def remove_ends(s):
+    if len(s) < 3:
+        return ""
+    return s[1:-1]
 #-----------------------------------------------
 
 
@@ -50,6 +67,12 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def is_palindrome(s):
+    if len(s) <= 1:
+        return True
+    processed = ''.join(s.split()).lower()
+    return processed == processed[::-1]
 #-----------------------------------------------
 
 
@@ -68,6 +91,14 @@
 
 #-----------------------------------------------
 # Solution goes here ->
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
 #-----------------------------------------------
 
 
@@ -90,6 +121,27 @@
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+
+def calculate_total_cost(shopping_cart, homestate):
+    subtotal = sum(item['price'] for item in shopping_cart)
+    total_with_tax = subtotal * (1 + 0.085)  
+    states_one = {'HI', 'AK', 'TX', 'FL'}
+    states_two = {'AL', 'MS', 'NV', 'IL'}
+    
+    if homestate in states_one:
+        shipping_fee = 10
+    elif homestate in states_two:
+        shipping_fee = 5
+    else:
+        shipping_fee = 0
+
+    total_cost = total_with_tax + shipping_fee
+    return total_cost
+
+
+
+
 #-----------------------------------------------
 
 
@@ -107,6 +159,17 @@
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+def fizz_buzz():
+    for num in range(1, 51):
+        if num % 3 == 0 and num % 5 == 0:
+            print("FizzBuzz")
+        elif num % 3 == 0:
+            print("Fizz")
+        elif num % 5 == 0:
+            print("Buzz")
+        else:
+            print("None")
 #-----------------------------------------------
 
 
@@ -146,4 +209,17 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def chess_board(rows, columns):
+    board = []
+    for row in range(rows):
+        current_row = []
+        for col in range(columns):
+            if (row + col) % 2 == 0:
+                current_row.append("O")
+            else:
+                current_row.append("X")
+        board.append(current_row)
+
+    return board
 #-----------------------------------------------
