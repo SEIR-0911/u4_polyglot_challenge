@@ -12,9 +12,26 @@
 # add(7,-12) //=> -5
 # add("peanut_butter", "marshmellow_fluff") //=> NaN
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def add_list(*nums):
+    if not nums:
+        return 0
+    
+    sum_total = 0
+    for num in nums:
+        # found 'isinstance' example in W3Schools
+        if not isinstance(num, (int, float)):
+            return 'NaN'
+        else:
+            sum_total += num
+
+    return sum_total
+
+# print(add_list())
+# print(add_list(1))
+# print(add_list(1,50,1.23))
+# print(add_list(7,-12))
+# print(add_list("peanut_butter", "marshmellow_fluff"))
+
 
 
 
@@ -29,10 +46,14 @@
 # remove_ends('Led Zeppelin Rules'); //=> "ed Zeppelin Rule"
 # remove_ends('a'); //=> "" (empty string)
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def remove_ends(input):
+    if len(input) < 3:
+        print("")
+    else:
+        print(input[1:-1])
 
+# remove_ends('Led Zeppelin Rules')
+# remove_ends('a')
 
 
 # Challenge 3: is_palindrome
@@ -48,10 +69,16 @@
 # is_palindrome('A nut for a jar of tuna'); //=> true
 # is_palindrome(''); //=> true
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
-
+def is_palindrome(text):
+    # ''.join ignores spaces and lower removes caps for comparison
+    check_string = ''.join(text.split()).lower()
+    return check_string == check_string[::-1]
+    
+        
+# print(is_palindrome('SEI Rocks'))
+# print(is_palindrome('rotor'))
+# print(is_palindrome('A nut for a jar of tuna'))
+# print(is_palindrome(''))
 
 
 # Challenge 4: is_prime
@@ -66,9 +93,19 @@
 # is_prime(29) //=> true
 # is_prime(200) //=> false
 
-#-----------------------------------------------
-# Solution goes here ->
-#-----------------------------------------------
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) +1):
+        if num % i == 0:
+            return False
+    return True
+
+# print(is_prime(2))
+# print(is_prime(3))
+# print(is_prime(4))
+# print(is_prime(29))
+# print(is_prime(200))
 
 
 
@@ -79,18 +116,34 @@
 
 # Your function should take the list and the user's homestate as arguments
 
-# shopping_cart = [ 
-#   {"item": "headphones", "price": 25},
-#   {"item": "speakers", "price": 40 },
-#   {"item": "microphone", "price": 70},
-#   {"item": "lamp", "price": 15 },
-#   {"item": "tower fan", "price": 35 },
-# ]
+shopping_cart = [ 
+  {"item": "headphones", "price": 25},
+  {"item": "speakers", "price": 40 },
+  {"item": "microphone", "price": 70},
+  {"item": "lamp", "price": 15 },
+  {"item": "tower fan", "price": 35 },
+]
+
+def calc_total_cost(shopping_cart, homestate):
+    sales_tax = 0.085
+    subtotal = sum(item['price'] for item in shopping_cart)
+    total_cost = subtotal * (sales_tax + 1)
+
+    if homestate in ['HI', 'AK', 'TX', 'FL']:
+        shipping_fee = 10
+    elif homestate in ['AL', 'MS', 'NV', 'IL']:
+        shipping_fee = 5
+    else:
+        shipping_fee = 0
+
+    total_cost += shipping_fee
+    print(round(total_cost, 2))
+
+# calc_total_cost(shopping_cart, 'MS')
+# calc_total_cost(shopping_cart, 'AK')
+# calc_total_cost(shopping_cart, 'MA')
 
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
 
 
 # Challenge 6: fizz_buzz
@@ -105,9 +158,23 @@
 # fizz_buzz(22) //=> 22 ""
 # fizz_buzz(ham_sandwich) //=> "ham_sandwich is not a Number"
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+def fizz_buzz(num):
+    if not isinstance(num, int):
+        return (f'{num} is not a Number')
+    elif num % 3 == 0 and num % 5 == 0:
+        return 'FizzBuzz'
+    elif num % 3 == 0:
+        return 'Fizz'
+    elif num % 5 == 0:
+        return 'Buzz'
+    else:
+        return num
+
+# print(fizz_buzz(10))
+# print(fizz_buzz(30))
+# print(fizz_buzz(18))
+# print(fizz_buzz(22))
+# print(fizz_buzz('ham_sandwich'))
 
 
 
@@ -144,6 +211,18 @@
 # The first row should always start with a white space 'O'
 
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def chess_board(rows, columns):
+    board = []
+    for x in range(rows):
+        row = []
+        for y in range(columns):
+            # Determines 'O' or 'X', first row will always start with 'O'
+            if (x + y) % 2 == 0:
+                row.append("O")
+            else:
+                row.append("X")
+        board.append(row)
+    print(board)
+
+# chess_board(6,4)
+# chess_board(3,7)
