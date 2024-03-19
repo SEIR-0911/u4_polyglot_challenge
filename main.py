@@ -14,6 +14,23 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+def add_list(*nums):
+    sum_nums = 0
+    
+    for num in nums:
+        if not isinstance(num, (int, float)):
+            return float('nan')
+        else:
+            sum_nums += num
+    
+    return sum_nums
+
+
+result = add_list("marshmellow_fluff")
+print(result)
+    
+
 #-----------------------------------------------
 
 
@@ -31,6 +48,13 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+my_str = 'Led Zeppelin Rules'
+
+result = my_str[1:-1]
+print(result)
+
+
 #-----------------------------------------------
 
 
@@ -50,6 +74,17 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+test_str = "a nut for a jar of tuna"
+joined_str = ''.join(test_str.lower().split())
+if joined_str == joined_str[::-1]:
+    print(True)
+else:
+    print(False)
+
+
+
+
 #-----------------------------------------------
 
 
@@ -68,6 +103,17 @@
 
 #-----------------------------------------------
 # Solution goes here ->
+
+num = 3
+remainder = any(num % i  == 0 for i in range(2, num))
+if remainder:
+    print(False)
+else:
+    print(True)
+
+
+
+
 #-----------------------------------------------
 
 
@@ -90,6 +136,28 @@
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+price = 35
+user_homestate = "HI" 
+
+def total_cost(price, user_homestate):
+    tax_rate = 1.085
+    shipping_fee = 0
+
+    if user_homestate in ('HI', 'AK', 'TX', 'FL'):
+        shipping_fee = 10
+    elif user_homestate in ('AL', 'MS', 'NV', 'IL'):
+        shipping_fee = 5
+
+    total = price * tax_rate + shipping_fee
+    return total
+
+
+final_cost = total_cost(price, user_homestate)
+print("Total cost with tax and shipping: $", final_cost)
+
+
+
 #-----------------------------------------------
 
 
@@ -107,6 +175,26 @@
 
 #-----------------------------------------------
 # Solution Goes Here ->
+
+def fizz_buzz(value):
+    if not isinstance(value, int):
+        return f"{value} is not a number"
+
+    result = ""
+    if value % 3 == 0:
+        result += "Fizz"
+    if value % 5 == 0:
+        result += "Buzz"
+
+    if not result:
+        result = str(value)
+
+    return result
+
+for num in range(1, 51):
+    print(fizz_buzz(num))
+
+
 #-----------------------------------------------
 
 
@@ -146,4 +234,28 @@
 
 #-----------------------------------------------
 # Solution Goes Here - >
+
+
+def checkerboard(X, Y):
+    board = [ ]
+
+    for row in range(X):
+        value_of_row = ['X' if (row + col) % 2 == 0 else '0' for col in range(Y)]
+        board.append(value_of_row)
+    return board
+
+
+
+
+X = 5
+Y = 3
+result = checkerboard(X, Y)
+
+
+for row in result:
+    print(row)
+
+
+
+
 #-----------------------------------------------
