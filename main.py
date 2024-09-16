@@ -19,6 +19,21 @@
 
 
 
+def add_list(*nums):
+    
+    if not nums:
+        return 0
+    
+    for num in nums:
+        if not isinstance(num, (int, float)):
+            return "NaN"
+    
+    return sum(nums)
+
+print(add_list(1,2,3,4,5,6,7,'i'))
+print(add_list())
+print(add_list(1,2,3,4,5,6,7))
+
 # Challenge 2: remove_ends
 
 # Prompt:
@@ -32,6 +47,15 @@
 #-----------------------------------------------
 # Solution Goes Here - >
 #-----------------------------------------------
+
+def remove_ends(str):
+    if len(str) < 3:
+        return ''
+    return str[1:-1]
+
+print(remove_ends('I already know python'))
+print(remove_ends('at'))
+    
 
 
 
@@ -52,7 +76,19 @@
 # Solution Goes Here - >
 #-----------------------------------------------
 
+def is_palindrome(str):
+    if len(str) <= 1:
+        return True
+    reversed_str = str[::-1] 
+    if str.replace(' ', '').lower() == reversed_str.replace(' ', '').lower():
+        return True
+    else:
+        return False
 
+print(is_palindrome('SEI Rocks'))
+print(is_palindrome('rotor'))
+print(is_palindrome('A nut for a jar of tuna'))
+print(is_palindrome(''))
 
 # Challenge 4: is_prime
 
@@ -70,8 +106,22 @@
 # Solution goes here ->
 #-----------------------------------------------
 
+def is_prime(num):
 
+    if num <= 1:
+        return False
+    
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+        
+    return True
 
+print(is_prime(2)) 
+print(is_prime(3))
+print(is_prime(4)) 
+print(is_prime(29)) 
+print(is_prime(200)) 
 
 # Challenge 5: total_checkout_cost
 
@@ -92,6 +142,29 @@
 # Solution Goes Here ->
 #-----------------------------------------------
 
+def total_ceckout_cost(shopping_cart, location):
+    subtotal = sum(item['price'] for item in shopping_cart)
+    subtotal_w_tax = subtotal * 1.085
+    if location in ['HI', 'AK', 'TX', 'FL']:
+        shipping = 10
+    elif location in ['AL', 'MS', 'NV','IL']:
+        shipping = 5
+    else:
+        shipping = 0
+    
+    return round(subtotal_w_tax + shipping, 2) 
+
+shopping_cart = [ 
+  {"item": "headphones", "price": 25},
+  {"item": "speakers", "price": 40 },
+  {"item": "microphone", "price": 70},
+  {"item": "lamp", "price": 15 },
+  {"item": "tower fan", "price": 35},
+]
+
+print(f'The total cost is: $ {total_ceckout_cost(shopping_cart, "HI")}')
+print(f'The total cost is: $ {total_ceckout_cost(shopping_cart, "AL")}')
+print(f'The total cost is: $ {total_ceckout_cost(shopping_cart, "CA")}')
 
 # Challenge 6: fizz_buzz
 
@@ -109,8 +182,24 @@
 # Solution Goes Here ->
 #-----------------------------------------------
 
+def fizz_buzz(num):
+    if not isinstance(num, (int, float)):
+        return 'is not a number'
+    # print(num%5)
+    # print(num%3)
+    if (num % 5 == 0 and num % 3 == 0):
+        print(num, 'FizzBuzz')
+    elif num % 5 == 0 :
+        print(num, 'Buzz')
+    elif num % 3 == 0:
+        print(num, 'Fizz')
+    else:
+        print(num)
 
+for i in range(1,51):
+    fizz_buzz(i)
 
+print(fizz_buzz("ham_sandwich")) 
 
 # Challenge 7 - Chessboard Creator
 
@@ -147,3 +236,29 @@
 #-----------------------------------------------
 # Solution Goes Here - >
 #-----------------------------------------------
+
+def chess_board(y, x):
+    board = []
+    for i in range(y):
+        row = []
+        for j in range(x):           
+            if j % 2 == 0: 
+                if i % 2 == 0:
+                    row.append("O")
+                else:
+                    row.append("X")
+            else:
+                if i % 2 == 0:
+                    row.append("X")
+                else:
+                    row.append("O")
+        board.append(row)
+    return board
+
+def print_formatted(data):
+    print("[")
+    for sublist in data:        
+        print("   [" + ",".join(f'"{item}"' for item in sublist) + "],")
+    print("]")
+
+print_formatted(chess_board(14,14))
