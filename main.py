@@ -13,7 +13,18 @@
 # add("peanut_butter", "marshmellow_fluff") //=> NaN
 
 #-----------------------------------------------
-# Solution Goes Here - >
+def add_list(*arguments):
+    result = 0
+    for num in arguments:
+        if not isinstance(num, (int, float)):
+            return "Nan"
+        result += num
+    return result
+
+#print(add_list(1))
+#print(add_list(1, 50, 1.23))
+#print(add_list(7, -12))
+#print(add_list("cow", "dog", "cat"))
 #-----------------------------------------------
 
 
@@ -22,15 +33,23 @@
 # Challenge 2: remove_ends
 
 # Prompt:
-# - Write a function called remove_ends that accepts a single string argument, then returns the a string with the first and last characters removed.
+#- Write a function called remove_ends that accepts a single string argument, then returns the a string with the first and last characters removed.
 # - If the length of the string argument is less than 3, return an empty string.
 
 # Examples:
 # remove_ends('Led Zeppelin Rules'); //=> "ed Zeppelin Rule"
-# remove_ends('a'); //=> "" (empty string)
+# remove_ends('a'); //=> "" (empty string)#
 
 #-----------------------------------------------
-# Solution Goes Here - >
+def remove_ends(single_string):
+
+    if len(single_string) < 3:
+        return ""
+    
+    return single_string[1:-1]
+
+#print(remove_ends('Led Zeppelin Rules!'))
+#print(remove_ends('a'))
 #-----------------------------------------------
 
 
@@ -49,7 +68,17 @@
 # is_palindrome(''); //=> true
 
 #-----------------------------------------------
-# Solution Goes Here - >
+def is_palindrome(string_input):
+
+    processed_string = ''.join(string_input.lower().split())
+
+    return len(processed_string) <= 1 or processed_string == processed_string[::-1]
+
+#print(is_palindrome('SEI Rocks'))
+# print(is_palindrome('rotor'))
+# print(is_palindrome('racecar'))
+# print(is_palindrome('A nut for a jar of tuna'))
+# print(is_palindrome(''))
 #-----------------------------------------------
 
 
@@ -67,7 +96,26 @@
 # is_prime(200) //=> false
 
 #-----------------------------------------------
-# Solution goes here ->
+def is_prime(num):
+
+    if num < 2:
+
+        return False
+    
+    for i in range(2, int(num**0.5) + 1):
+
+        if num % i == 0:
+
+            return False
+        
+    return True
+
+# print(is_prime(2))
+# print(is_prime(3))
+# print(is_prime(4))
+# print(is_prime(29))
+# print(is_prime(200))
+
 #-----------------------------------------------
 
 
@@ -89,7 +137,44 @@
 
 
 #-----------------------------------------------
-# Solution Goes Here ->
+def calculate_total_cost(shopping_cart, homestate):
+
+    sales_tax_rate = 0.085
+    shipping_fees = {
+        "HI": 10,
+        "AK": 10,
+        "TX": 10,
+        "FL": 10,
+        "AL": 5,
+        "MS": 5,
+        "NV": 5,
+        "IL": 5
+    }
+
+    subtotal = sum(item['price'] for item in shopping_cart)
+
+    tax = subtotal * sales_tax_rate
+
+    shipping_fee = 0
+    if homestate in shipping_fees:
+        shipping_fee = shipping_fees[homestate]
+
+    total_cost = subtotal + tax + shipping_fee
+
+    return total_cost
+
+shopping_cart = [
+    {"item": "headphones", "price": 25},
+    {"item": "speakers", "price": 40},
+    {"item": "microphone", "price": 70},
+    {"item": "lamp", "price": 15},
+    {"item": "tower fan", "price": 35},
+]
+
+homestate = "TX"
+total_cost = calculate_total_cost(shopping_cart, homestate)
+
+# print(f'Total Cost: ${total_cost: .2f}')
 #-----------------------------------------------
 
 
@@ -106,7 +191,29 @@
 # fizz_buzz(ham_sandwich) //=> "ham_sandwich is not a Number"
 
 #-----------------------------------------------
-# Solution Goes Here ->
+def fizz_buzz(number):
+
+    if not isinstance(number, int):
+
+        return f"{number} is not a number"
+    
+    result = ''
+
+    if number % 3 == 0:
+
+        result += "fizz"
+
+    if number % 5 == 0:
+
+        result += "Buzz"
+
+    return f"{number} {result}"
+
+print(fizz_buzz(10))
+print(fizz_buzz(30))
+print(fizz_buzz(18))
+print(fizz_buzz(22))
+print(fizz_buzz('chicken_smoothie'))
 #-----------------------------------------------
 
 
