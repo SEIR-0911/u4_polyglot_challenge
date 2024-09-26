@@ -12,10 +12,21 @@
 # add(7,-12) //=> -5
 # add("peanut_butter", "marshmellow_fluff") //=> NaN
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
 
+def add_list(*numbers):
+    tot = 0
+    for number in numbers:
+        if not isinstance(number, (int, float)):
+            return "NaN"
+        tot += number
+    return tot
+
+# Examples:
+# print(add_list(1))  # 1
+# print(add_list(1, 50, 1.23))  # 52.23
+# print(add_list(7, -12))  # -5
+# print(add_list("peanut_butter", "marshmallow_fluff"))  # NaN
+# print(add_list())  # 0
 
 
 
@@ -29,9 +40,15 @@
 # remove_ends('Led Zeppelin Rules'); //=> "ed Zeppelin Rule"
 # remove_ends('a'); //=> "" (empty string)
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def remove_ends(string):
+    if len(string) < 3:
+        return ""
+    else:
+        newstring = string[1:-1]
+
+        return newstring
+    
+#print(remove_ends('hello'))
 
 
 
@@ -48,9 +65,19 @@
 # is_palindrome('A nut for a jar of tuna'); //=> true
 # is_palindrome(''); //=> true
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def is_palindrome(string):
+    # Convert the string to lowercase and remove spaces
+    clean_string = ''.join(string.lower().split())
+
+    # Check if the cleaned string is equal to its reverse
+    return clean_string == clean_string[::-1]
+
+# Test cases
+# print(is_palindrome('SEI Rocks'))          # Should print False
+# print(is_palindrome('rotor'))               # Should print True
+# print(is_palindrome('A nut for a jar of tuna'))  # Should print True
+# print(is_palindrome(''))                    # Should print True
+    
 
 
 
@@ -66,9 +93,22 @@
 # is_prime(29) //=> true
 # is_prime(200) //=> false
 
-#-----------------------------------------------
-# Solution goes here ->
-#-----------------------------------------------
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+
+# print(is_prime(2))   # Output: True
+# print(is_prime(3))   # Output: True
+# print(is_prime(4))   # Output: False
+# print(is_prime(29))  # Output: True
+# print(is_prime(200)) # Output: False
+
+
 
 
 
@@ -79,18 +119,31 @@
 
 # Your function should take the list and the user's homestate as arguments
 
-# shopping_cart = [ 
-#   {"item": "headphones", "price": 25},
-#   {"item": "speakers", "price": 40 },
-#   {"item": "microphone", "price": 70},
-#   {"item": "lamp", "price": 15 },
-#   {"item": "tower fan", "price": 35 },
-# ]
+shopping_cart = [ 
+  {"item": "headphones", "price": 25},
+  {"item": "speakers", "price": 40 },
+  {"item": "microphone", "price": 70},
+  {"item": "lamp", "price": 15 },
+  {"item": "tower fan", "price": 35 },
+]
 
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+def sales_tax(list, home_state):
+    for obj in list:
+        item_tax =  obj["price"] * .085
+        item_total = obj["price"] + item_tax
+
+        if home_state in ["HI", "AK", "TX", "FL"]:
+            item_total += 10
+        elif home_state in ["AL", "MS","NV", "IL"]:
+            item_total += 5
+        else:
+            print(item_total)
+        print(item_total)
+
+homeState = "AL"
+
+# sales_tax(shopping_cart, homeState)
 
 
 # Challenge 6: fizz_buzz
@@ -105,9 +158,17 @@
 # fizz_buzz(22) //=> 22 ""
 # fizz_buzz(ham_sandwich) //=> "ham_sandwich is not a Number"
 
-#-----------------------------------------------
-# Solution Goes Here ->
-#-----------------------------------------------
+def fizz_buzz():
+    for item in range(1,50):
+        if item % 3 == 0 and item % 5 == 0:
+            print("FizzBuzz")
+        elif item % 5 == 0:
+            print("Buzz")
+        elif item % 3 == 0:
+            print('Fizz')
+        else:
+            print(item)
+# fizz_buzz()
 
 
 
@@ -144,6 +205,25 @@
 # The first row should always start with a white space 'O'
 
 
-#-----------------------------------------------
-# Solution Goes Here - >
-#-----------------------------------------------
+def chess_board(rows, columns):
+    board = []
+    
+    for row in range(rows):
+        board_row = []
+        for col in range(columns):
+            if (row + col) % 2 == 0:
+                board_row.append("O")
+            else:
+                board_row.append("X")
+        board.append(board_row)
+    
+    return board
+
+# Examples
+chessboard_1 = chess_board(6, 4)
+for row in chessboard_1:
+    print(row)
+
+chessboard_2 = chess_board(3, 7)
+for row in chessboard_2:
+    print(row)
